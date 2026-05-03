@@ -10,7 +10,7 @@ type Event = {
   payload?: { commits?: { message: string }[]; ref?: string };
 };
 
-const HANDLE = "nateisles";
+const HANDLE = "nathanisles-ctrl";
 
 function formatType(t: string) {
   return (

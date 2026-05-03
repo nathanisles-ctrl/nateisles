@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { socials } from "@/components/socials";
+import Faq from "@/components/Faq";
 
 export default function ContactPage() {
   return (
@@ -163,6 +164,13 @@ function ContactInner() {
               For collabs, custom work, press.
             </p>
           </a>
+        </div>
+
+        <div className="mt-24 pt-16 border-t border-bone/5">
+          <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-6 text-center">
+            FREQUENT QUESTIONS
+          </p>
+          <Faq />
         </div>
 
         <div className="mt-20 pt-12 border-t border-bone/5 text-center">

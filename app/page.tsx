@@ -2,7 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import IslandCard from "@/components/IslandCard";
+import { latest, currently } from "@/components/latest";
 
 const islands = [
   {
@@ -142,6 +144,72 @@ export default function Home() {
         </div>
       </section>
 
+      {/* LATEST STRIP */}
+      <section className="relative px-6 md:px-12 py-24 border-t border-bone/5">
+        <div className="max-w-[1500px] mx-auto">
+          <div className="flex items-end justify-between mb-10">
+            <p className="text-ember font-mono text-[10px] tracking-[0.3em]">
+              LATEST / FOUR ISLANDS
+            </p>
+            <p className="text-bone/40 font-mono text-[10px] tracking-[0.3em]">
+              UPDATED ROLLING
+            </p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+            {latest.map((item, i) => (
+              <motion.div
+                key={item.island}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{
+                  duration: 0.9,
+                  delay: i * 0.1,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                <Link
+                  href={item.href}
+                  className="group block border border-bone/10 hover:border-ember/40 transition-colors duration-500"
+                >
+                  <div className="relative aspect-[5/6] overflow-hidden bg-storm/20">
+                    {item.thumb && item.isVideo && (
+                      <video
+                        src={item.thumb}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:opacity-80 transition-opacity duration-700"
+                      />
+                    )}
+                    {item.thumb && !item.isVideo && (
+                      <img
+                        src={item.thumb}
+                        alt={item.title}
+                        className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-700"
+                      />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-obsidian via-obsidian/40 to-transparent" />
+                    <div className="absolute top-3 left-3 text-ember font-mono text-[9px] tracking-[0.3em]">
+                      {item.island}
+                    </div>
+                    <div className="absolute bottom-3 left-3 right-3">
+                      <div className="font-display font-black text-bone text-base md:text-lg tracking-[0.02em] leading-tight">
+                        {item.title}
+                      </div>
+                      <div className="mt-1 text-bone/55 text-[10px] tracking-[0.18em]">
+                        {item.meta}
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* VOICE LINE — split with portrait */}
       <section className="relative min-h-screen flex items-center px-6 md:px-12 py-32">
         <div className="max-w-[1400px] mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
@@ -159,6 +227,28 @@ export default function Home() {
             <p className="mt-10 text-bone/70 text-base md:text-lg max-w-md">
               Former pro offensive lineman. AI filmmaker. Musician. Builder.
             </p>
+
+            <div className="mt-12 pt-8 border-t border-bone/10 max-w-md space-y-2">
+              <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-4">
+                CURRENTLY
+              </p>
+              {[
+                { k: "BUILDING", v: currently.building },
+                { k: "WRITING", v: currently.writing },
+                { k: "READING", v: currently.reading },
+                { k: "WATCHING", v: currently.watching },
+              ].map((row) => (
+                <div
+                  key={row.k}
+                  className="grid grid-cols-[100px_1fr] gap-4 text-sm"
+                >
+                  <span className="text-bone/40 font-mono text-[10px] tracking-[0.25em] pt-0.5">
+                    {row.k}
+                  </span>
+                  <span className="text-bone/85">{row.v}</span>
+                </div>
+              ))}
+            </div>
           </motion.div>
 
           <motion.div

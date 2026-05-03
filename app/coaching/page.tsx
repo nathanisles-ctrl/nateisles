@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useState } from "react";
+import Countdown from "@/components/Countdown";
 
 const pillars = [
   {
@@ -155,6 +156,35 @@ export default function CoachingPage() {
         </div>
       </section>
 
+      {/* NFL CREDENTIALS */}
+      <section className="relative px-6 md:px-12 py-16 border-t border-bone/5">
+        <div className="max-w-[1300px] mx-auto">
+          <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-8 text-center">
+            ON THE LINE — RECEIPTS
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-bone/5">
+            {[
+              { stat: "NFL", label: "LEVEL PLAYED" },
+              { stat: "10+", label: "YRS ON THE LINE" },
+              { stat: "1000s", label: "REPS COACHED" },
+              { stat: "ALL 5", label: "POSITIONS TAUGHT" },
+            ].map((c) => (
+              <div
+                key={c.label}
+                className="bg-obsidian-deep p-6 md:p-10 text-center"
+              >
+                <div className="font-display font-black text-bone text-3xl md:text-5xl tracking-[0.04em]">
+                  {c.stat}
+                </div>
+                <div className="mt-3 text-ember font-mono text-[9px] md:text-[10px] tracking-[0.3em]">
+                  {c.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* PILLARS */}
       <section className="relative px-6 md:px-12 py-32 border-t border-bone/5">
         <div className="max-w-[1300px] mx-auto">
@@ -265,6 +295,41 @@ export default function CoachingPage() {
 
           <p className="mt-6 text-bone/40 text-xs tracking-[0.18em]">
             FRAME-BY-FRAME · PASS SET · WEEK 01
+          </p>
+        </div>
+      </section>
+
+      {/* COUNTDOWN */}
+      <section className="relative px-6 md:px-12 py-32 border-t border-bone/5">
+        <div className="max-w-[1300px] mx-auto text-center">
+          <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-6">
+            UNTIL THE DOORS OPEN
+          </p>
+          <h2 className="font-display font-black text-bone text-4xl md:text-6xl tracking-[0.02em] mb-12">
+            Q4 2026.
+          </h2>
+          <Countdown />
+        </div>
+      </section>
+
+      {/* TESTIMONIAL */}
+      <section className="relative px-6 md:px-12 py-32 border-t border-bone/5">
+        <div className="max-w-[1100px] mx-auto">
+          <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-10">
+            EARLY VOICES
+          </p>
+          <motion.blockquote
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-15%" }}
+            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+            className="font-display font-black text-bone text-3xl md:text-5xl lg:text-6xl tracking-[0.02em] leading-[1.1]"
+          >
+            &ldquo;Coming soon — early member quotes will live here once the
+            first cohort runs.&rdquo;
+          </motion.blockquote>
+          <p className="mt-8 text-ember font-mono text-[11px] tracking-[0.3em]">
+            — FOUNDING MEMBER, TBD
           </p>
         </div>
       </section>

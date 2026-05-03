@@ -209,6 +209,113 @@ export default function FilmsPage() {
         </div>
       </section>
 
+      {/* FEATURED DROP */}
+      <section className="relative px-6 md:px-12 py-24 border-t border-bone/5">
+        <div className="max-w-[1500px] mx-auto">
+          <div className="flex items-center gap-3 mb-10">
+            <span className="h-1.5 w-1.5 rounded-full bg-ember pulse-soft" />
+            <p className="text-ember font-mono text-[10px] tracking-[0.3em]">
+              FEATURED DROP / NEW
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+            <div className="relative aspect-video overflow-hidden border border-bone/10 bg-obsidian">
+              <video
+                src={clips[2].src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-obsidian/30 via-transparent to-transparent" />
+              <div className="absolute top-3 left-3 text-ember font-mono text-[9px] tracking-[0.3em]">
+                {clips[2].id} · {clips[2].tool}
+              </div>
+            </div>
+            <div>
+              <h2 className="font-display font-black text-bone text-4xl md:text-6xl tracking-[0.02em] leading-[1.05]">
+                {clips[2].title}.
+              </h2>
+              <p className="mt-6 text-bone/75 text-base md:text-lg leading-relaxed">
+                A study in {clips[2].category.toLowerCase()} —{" "}
+                {clips[2].tool} pipeline, anamorphic frame, slow push-in. The
+                kind of shot that used to require a crew, a dolly, and a
+                location permit.
+              </p>
+              <button
+                onClick={() => setActive(clips[2])}
+                className="mt-8 inline-flex items-center gap-3 border border-ember text-ember px-6 py-3 text-sm tracking-[0.2em] hover:bg-ember hover:text-obsidian transition-colors duration-500"
+              >
+                OPEN FRAME →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* PROCESS BREAKDOWN */}
+      <section className="relative px-6 md:px-12 py-24 border-t border-bone/5">
+        <div className="max-w-[1500px] mx-auto">
+          <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-5">
+            PROCESS / PROMPT → FRAME
+          </p>
+          <h2 className="font-display font-black text-bone text-4xl md:text-6xl tracking-[0.02em] mb-16 leading-[1.05]">
+            How a frame
+            <br />
+            gets made.
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+            {[
+              {
+                num: "01",
+                title: "PROMPT",
+                body: "Every shot starts as a sentence. The discipline is in restraint — fewer adjectives, sharper composition.",
+                example:
+                  "&ldquo;Cinematic shot, anamorphic, slow push toward a single warm gold light source. Heavy film grain. No people.&rdquo;",
+              },
+              {
+                num: "02",
+                title: "MODEL",
+                body: "Hailuo for motion, Higgsfield for subject continuity, Kling for camera control, Runway for finishing. Each model has a hand it does best.",
+                example: "HAILUO · HIGGSFIELD · KLING · RUNWAY",
+              },
+              {
+                num: "03",
+                title: "FRAME",
+                body: "A 4–10 second clip. Looped, color-graded, contextualized in the sequence. The cut is the craft.",
+                example: "→ HOVER ANY CLIP IN THE GRID",
+              },
+            ].map((step) => (
+              <motion.div
+                key={step.num}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-10%" }}
+                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                className="border border-bone/10 p-8"
+              >
+                <div className="text-ember font-display font-black text-5xl tracking-[0.04em]">
+                  {step.num}
+                </div>
+                <div className="mt-6 font-display font-black text-bone text-xl tracking-[0.18em]">
+                  {step.title}
+                </div>
+                <p className="mt-4 text-bone/75 text-sm leading-relaxed">
+                  {step.body}
+                </p>
+                <p
+                  className="mt-6 text-bone/50 italic text-sm leading-relaxed"
+                  dangerouslySetInnerHTML={{ __html: step.example }}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* SHOWCASE */}
       <section className="relative px-6 md:px-12 py-24 border-t border-bone/5">
         <div className="max-w-[1500px] mx-auto">

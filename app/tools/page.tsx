@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import GithubFeed from "@/components/GithubFeed";
+import GithubStats from "@/components/GithubStats";
 
 type Tool = {
   name: string;
@@ -120,6 +121,9 @@ export default function ToolsPage() {
           <h2 className="font-display font-black text-bone text-3xl md:text-5xl tracking-[0.02em] mb-10">
             Building, in public.
           </h2>
+          <div className="mb-10">
+            <GithubStats />
+          </div>
           <GithubFeed />
         </div>
       </section>
