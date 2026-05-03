@@ -2,24 +2,30 @@
 
 import { motion } from "framer-motion";
 import { useRef, useState } from "react";
+import AudioPlayer from "@/components/AudioPlayer";
+import { tracks, type Track } from "@/components/tracks";
 
-type Track = {
-  id: string;
-  title: string;
-  year: string;
-  format: string;
-  length: string;
-};
-
-const tracks: Track[] = [];
-const hasRelease = false;
+const featured = tracks[0];
+const catalog = tracks;
 
 export default function MusicPage() {
+  // Allow only one player active at a time
+  const playersRef = useRef<Map<string, () => void>>(new Map());
+  const [activeId, setActiveId] = useState<string | null>(null);
+
+  const onPlayerStarts = (track: Track) => {
+    setActiveId(track.id);
+    playersRef.current.forEach((pause, id) => {
+      if (id !== track.id) pause();
+    });
+  };
+
+  const register = (id: string) => (api: { pause: () => void }) => {
+    playersRef.current.set(id, api.pause);
+  };
+
   return (
-    <main
-      className="relative"
-      style={{ backgroundColor: "#0A0807" }}
-    >
+    <main className="relative" style={{ backgroundColor: "#0A0807" }}>
       <div className="grain-overlay" aria-hidden />
 
       {/* HERO */}
@@ -63,126 +69,106 @@ export default function MusicPage() {
         </div>
       </section>
 
-      {/* LATEST RELEASE */}
-      <section className="relative px-6 md:px-12 py-32 md:py-44">
-        {hasRelease ? (
-          <div className="max-w-[1300px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <div className="aspect-square w-full bg-gradient-to-br from-ember-deep/40 via-obsidian-warm to-obsidian shadow-2xl border border-ember/10" />
-              <div className="mt-6">
-                <div className="font-display font-black text-bone text-3xl">
-                  Untitled No. 001
-                </div>
-                <div className="mt-2 text-ember text-[10px] tracking-[0.3em]">
-                  SINGLE
-                </div>
-                <div className="mt-1 text-bone/60 text-xs tracking-[0.2em]">
-                  RELEASE: TBD 2026
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 1.2,
-                delay: 0.2,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-            >
-              <AudioPlayer />
-              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-bone/70 text-xs tracking-[0.2em]">
-                {["SPOTIFY", "APPLE MUSIC", "YOUTUBE", "SOUNDCLOUD"].map(
-                  (s) => (
-                    <a
-                      key={s}
-                      href="#"
-                      className="hover:text-ember relative group transition-colors duration-500"
-                    >
-                      {s}
-                      <span className="absolute -bottom-1 left-0 w-0 h-px bg-ember group-hover:w-full transition-all duration-500" />
-                    </a>
-                  )
-                )}
-              </div>
-            </motion.div>
-          </div>
-        ) : (
-          <div className="max-w-[900px] mx-auto text-center">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-15%" }}
-              transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display font-black text-bone text-4xl md:text-6xl tracking-[0.02em]"
-            >
-              First track dropping soon.
-            </motion.h2>
-            <p className="mt-8 text-bone/70 max-w-md mx-auto">
-              Sign up below to hear it before anyone else.
+      {/* FEATURED / LATEST */}
+      {featured && (
+        <section className="relative px-6 md:px-12 py-32 md:py-44">
+          <div className="max-w-[1300px] mx-auto">
+            <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-10">
+              LATEST
             </p>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="mt-10 flex items-end gap-4 max-w-md mx-auto"
-            >
-              <input
-                type="email"
-                placeholder="YOUR EMAIL"
-                className="flex-1 bg-transparent border-b border-bone/30 focus:border-ember py-3 text-bone outline-none transition-colors duration-500"
-              />
-              <button
-                type="submit"
-                className="text-ember text-sm tracking-[0.2em] py-3 hover:text-ember-light transition-colors duration-500"
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-15%" }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
               >
-                SUBMIT →
-              </button>
-            </form>
+                <div className="aspect-square w-full overflow-hidden shadow-2xl border border-ember/10">
+                  <img
+                    src={featured.cover}
+                    alt={featured.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="mt-6">
+                  <div className="font-display font-black text-bone text-4xl md:text-5xl tracking-[0.02em]">
+                    {featured.title}
+                  </div>
+                  <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10px] tracking-[0.3em]">
+                    <span className="text-ember">{featured.format}</span>
+                    <span className="text-bone/40">·</span>
+                    <span className="text-bone/60">{featured.year}</span>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-15%" }}
+                transition={{
+                  duration: 1.2,
+                  delay: 0.2,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                <AudioPlayer
+                  track={featured}
+                  onPlay={onPlayerStarts}
+                  registerControl={register(featured.id)}
+                />
+
+                <div className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-bone/70 text-xs tracking-[0.2em]">
+                  <a
+                    href={featured.sunoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-ember relative group transition-colors duration-500"
+                  >
+                    SUNO
+                    <span className="absolute -bottom-1 left-0 w-0 h-px bg-ember group-hover:w-full transition-all duration-500" />
+                  </a>
+                  {["SPOTIFY", "APPLE MUSIC", "YOUTUBE", "SOUNDCLOUD"].map(
+                    (s) => (
+                      <span
+                        key={s}
+                        className="text-bone/30"
+                        title="Coming soon"
+                      >
+                        {s}
+                      </span>
+                    )
+                  )}
+                </div>
+
+                {featured.description && (
+                  <p className="mt-8 text-bone/60 text-sm leading-relaxed max-w-md">
+                    {featured.description}
+                  </p>
+                )}
+              </motion.div>
+            </div>
           </div>
-        )}
-      </section>
+        </section>
+      )}
 
       {/* CATALOG */}
-      {tracks.length > 0 && (
+      {catalog.length > 1 && (
         <section className="relative px-6 md:px-12 py-24 border-t border-bone/5">
           <div className="max-w-[1100px] mx-auto">
             <h2 className="text-ember font-mono text-xs tracking-[0.3em] mb-12">
-              CATALOG
+              CATALOG / {String(catalog.length).padStart(3, "0")}
             </h2>
             <ul className="divide-y divide-bone/5">
-              {tracks.map((t) => (
-                <li
+              {catalog.map((t) => (
+                <CatalogRow
                   key={t.id}
-                  className="group flex items-center justify-between py-6 px-2 hover:bg-bone/[0.02] transition-colors duration-500 cursor-pointer"
-                >
-                  <div className="flex items-baseline gap-6">
-                    <span className="text-ember font-mono text-xs tracking-[0.3em] w-10">
-                      {t.id}
-                    </span>
-                    <div>
-                      <div className="font-display font-black text-bone text-2xl tracking-[0.02em]">
-                        {t.title}
-                      </div>
-                      <div className="text-bone/50 text-[10px] tracking-[0.3em] mt-1">
-                        {t.format} · {t.length}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-6">
-                    <span className="text-bone/60 text-xs tracking-[0.2em]">
-                      {t.year}
-                    </span>
-                    <span className="text-ember text-xl group-hover:scale-125 transition-transform duration-500">
-                      →
-                    </span>
-                  </div>
-                </li>
+                  track={t}
+                  onPlay={onPlayerStarts}
+                  isActive={activeId === t.id}
+                  registerControl={register(t.id)}
+                />
               ))}
             </ul>
           </div>
@@ -207,7 +193,7 @@ export default function MusicPage() {
               same room.
             </h2>
             <p className="mt-8 text-bone/75 text-base md:text-lg leading-relaxed">
-              Every track is written, recorded, mixed, and finished here. No
+              Every track is written, produced, and finished here. No
               committees. No notes from a label. Just the room and the
               instinct.
             </p>
@@ -240,7 +226,7 @@ export default function MusicPage() {
       </section>
 
       {/* VOICE */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 py-24">
+      <section className="relative min-h-[60vh] flex items-center justify-center px-6 py-24">
         <div className="text-center max-w-3xl">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -273,53 +259,77 @@ export default function MusicPage() {
   );
 }
 
-function AudioPlayer() {
-  const ref = useRef<HTMLAudioElement>(null);
-  const [playing, setPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
-
-  const toggle = () => {
-    const a = ref.current;
-    if (!a) return;
-    if (playing) a.pause();
-    else a.play();
-    setPlaying(!playing);
-  };
+function CatalogRow({
+  track,
+  onPlay,
+  isActive,
+  registerControl,
+}: {
+  track: Track;
+  onPlay: (t: Track) => void;
+  isActive: boolean;
+  registerControl: (api: { pause: () => void }) => void;
+}) {
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-obsidian/80 border border-bone/10 p-6 md:p-8">
-      <audio
-        ref={ref}
-        onTimeUpdate={(e) => {
-          const a = e.currentTarget;
-          setProgress((a.currentTime / (a.duration || 1)) * 100);
-        }}
-        onEnded={() => setPlaying(false)}
+    <li
+      className={`group transition-colors duration-500 ${
+        isActive ? "bg-ember/[0.03]" : "hover:bg-bone/[0.02]"
+      }`}
+    >
+      <button
+        onClick={() => setOpen((o) => !o)}
+        className="w-full flex items-center justify-between py-6 px-2 text-left"
       >
-        <source src="" type="audio/mpeg" />
-      </audio>
-
-      <div className="flex items-center gap-6">
-        <button
-          onClick={toggle}
-          aria-label={playing ? "Pause" : "Play"}
-          className="w-14 h-14 rounded-full bg-ember text-obsidian flex items-center justify-center text-lg hover:bg-ember-light transition-colors duration-500"
-        >
-          {playing ? "❚❚" : "▶"}
-        </button>
-        <div className="flex-1 group">
-          <div className="h-px bg-bone/20 relative overflow-hidden group-hover:h-0.5 transition-all duration-300">
-            <div
-              className="absolute inset-y-0 left-0 bg-bone"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
-          <div className="mt-3 flex justify-between text-bone/40 font-mono text-[10px] tracking-[0.2em]">
-            <span>0:00</span>
-            <span>—:—</span>
+        <div className="flex items-baseline gap-6 min-w-0">
+          <span className="text-ember font-mono text-xs tracking-[0.3em] w-10 shrink-0">
+            {track.id}
+          </span>
+          <div className="min-w-0">
+            <div className="font-display font-black text-bone text-2xl tracking-[0.02em] truncate">
+              {track.title}
+            </div>
+            <div className="text-bone/50 text-[10px] tracking-[0.3em] mt-1">
+              {track.format} · {track.year}
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+        <div className="flex items-center gap-6 shrink-0">
+          <span
+            className={`text-ember text-xl transition-transform duration-500 ${
+              open ? "rotate-90" : ""
+            } group-hover:scale-125`}
+          >
+            →
+          </span>
+        </div>
+      </button>
+
+      {open && (
+        <div className="px-2 pb-8 pt-2 grid grid-cols-1 md:grid-cols-[200px_1fr] gap-6 items-start">
+          <img
+            src={track.cover}
+            alt={track.title}
+            className="w-full md:w-[200px] aspect-square object-cover border border-bone/10"
+          />
+          <div>
+            <AudioPlayer
+              track={track}
+              onPlay={onPlay}
+              registerControl={registerControl}
+            />
+            <a
+              href={track.sunoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 inline-block text-bone/60 hover:text-ember text-[11px] tracking-[0.25em] transition-colors duration-500"
+            >
+              OPEN ON SUNO →
+            </a>
+          </div>
+        </div>
+      )}
+    </li>
   );
 }
