@@ -130,10 +130,11 @@ export default function CoachingPage() {
               className="mt-10 text-bone/75 text-base md:text-lg leading-relaxed space-y-6"
             >
               <p>
-                I played offensive line in the NFL. Now I teach what most
-                coaches don&apos;t: the moments inside the reps. The eye
-                discipline. The hand violence. The patience. The mental
-                architecture of the position.
+                I played offensive line in the NFL, the CFL, and Arena
+                Football. Three leagues, three styles, one position. Now I
+                teach what most coaches don&apos;t: the moments inside the
+                reps. The eye discipline. The hand violence. The patience.
+                The mental architecture of the position.
               </p>
               <p className="text-bone">
                 This isn&apos;t another highlight reel. It&apos;s a curriculum.
@@ -150,7 +151,7 @@ export default function CoachingPage() {
               }}
               className="mt-8 text-ember font-mono text-[11px] tracking-[0.3em]"
             >
-              — N. ISLES, FORMER NFL O-LINE
+              — N. ISLES · NFL · CFL · ARENA
             </motion.p>
           </div>
         </div>
@@ -160,14 +161,13 @@ export default function CoachingPage() {
       <section className="relative px-6 md:px-12 py-16 border-t border-bone/5">
         <div className="max-w-[1300px] mx-auto">
           <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-8 text-center">
-            ON THE LINE — RECEIPTS
+            ON THE LINE — THE RECORD
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-bone/5">
+          <div className="grid grid-cols-3 gap-px bg-bone/5">
             {[
-              { stat: "NFL", label: "LEVEL PLAYED" },
-              { stat: "10+", label: "YRS ON THE LINE" },
-              { stat: "1000s", label: "REPS COACHED" },
-              { stat: "ALL 5", label: "POSITIONS TAUGHT" },
+              { stat: "NFL", label: "PRO LEAGUE 01" },
+              { stat: "CFL", label: "PRO LEAGUE 02" },
+              { stat: "ARENA", label: "PRO LEAGUE 03" },
             ].map((c) => (
               <div
                 key={c.label}
