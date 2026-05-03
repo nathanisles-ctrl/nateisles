@@ -130,11 +130,11 @@ export default function CoachingPage() {
               className="mt-10 text-bone/75 text-base md:text-lg leading-relaxed space-y-6"
             >
               <p>
-                I played offensive line in the NFL, the CFL, and Arena
-                Football. Three leagues, three styles, one position. Now I
-                teach what most coaches don&apos;t: the moments inside the
-                reps. The eye discipline. The hand violence. The patience.
-                The mental architecture of the position.
+                Eight years on the line. Six teams across three leagues —
+                NFL, CFL, Arena. Now I teach what most coaches don&apos;t:
+                the moments inside the reps. The eye discipline. The hand
+                violence. The patience. The mental architecture of the
+                position.
               </p>
               <p className="text-bone">
                 This isn&apos;t another highlight reel. It&apos;s a curriculum.
@@ -151,34 +151,73 @@ export default function CoachingPage() {
               }}
               className="mt-8 text-ember font-mono text-[11px] tracking-[0.3em]"
             >
-              — N. ISLES · NFL · CFL · ARENA
+              — N. ISLES · 8 YRS PRO · NFL · CFL · ARENA
             </motion.p>
           </div>
         </div>
       </section>
 
-      {/* NFL CREDENTIALS */}
-      <section className="relative px-6 md:px-12 py-16 border-t border-bone/5">
+      {/* THE RECORD */}
+      <section className="relative px-6 md:px-12 py-20 border-t border-bone/5">
         <div className="max-w-[1300px] mx-auto">
-          <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-8 text-center">
+          <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-10 text-center">
             ON THE LINE — THE RECORD
           </p>
-          <div className="grid grid-cols-3 gap-px bg-bone/5">
+
+          {/* Summary stats */}
+          <div className="grid grid-cols-3 gap-px bg-bone/5 mb-px">
             {[
-              { stat: "NFL", label: "PRO LEAGUE 01" },
-              { stat: "CFL", label: "PRO LEAGUE 02" },
-              { stat: "ARENA", label: "PRO LEAGUE 03" },
+              { stat: "8+", label: "YEARS PRO" },
+              { stat: "6", label: "TEAMS" },
+              { stat: "3", label: "LEAGUES" },
             ].map((c) => (
               <div
                 key={c.label}
                 className="bg-obsidian-deep p-6 md:p-10 text-center"
               >
-                <div className="font-display font-black text-bone text-3xl md:text-5xl tracking-[0.04em]">
+                <div className="font-display font-black text-bone text-3xl md:text-5xl tracking-[0.04em] tabular-nums">
                   {c.stat}
                 </div>
                 <div className="mt-3 text-ember font-mono text-[9px] md:text-[10px] tracking-[0.3em]">
                   {c.label}
                 </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Teams by league */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-bone/5">
+            {[
+              {
+                league: "NFL",
+                teams: ["Seattle Seahawks", "Arizona Cardinals"],
+              },
+              {
+                league: "CFL",
+                teams: ["Montreal Alouettes", "BC Lions"],
+              },
+              {
+                league: "ARENA",
+                teams: ["Columbus Lions", "Columbus Destroyers"],
+              },
+            ].map((g) => (
+              <div
+                key={g.league}
+                className="bg-obsidian-deep p-6 md:p-10"
+              >
+                <div className="text-ember font-mono text-[10px] tracking-[0.3em] mb-5">
+                  {g.league}
+                </div>
+                <ul className="space-y-2">
+                  {g.teams.map((t) => (
+                    <li
+                      key={t}
+                      className="font-display font-black text-bone text-lg md:text-xl tracking-[0.02em]"
+                    >
+                      {t}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
