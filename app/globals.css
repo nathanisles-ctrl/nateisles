@@ -1,0 +1,147 @@
+@import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@400;700;800;900&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --obsidian: #0a0a0a;
+  --bone: #e8e4da;
+  --ember: #c9a961;
+  --ember-light: #d4b373;
+  --ember-deep: #8b6f30;
+  --storm: #2a3942;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background-color: var(--obsidian);
+  color: var(--bone);
+  font-family: "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--ember);
+  color: var(--obsidian);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  html,
+  body,
+  a,
+  button {
+    cursor: none;
+  }
+}
+
+.font-display {
+  letter-spacing: -0.01em;
+}
+
+@keyframes grain {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-2%, -2%);
+  }
+  20% {
+    transform: translate(2%, -1%);
+  }
+  30% {
+    transform: translate(-1%, 2%);
+  }
+  40% {
+    transform: translate(1%, 1%);
+  }
+  50% {
+    transform: translate(-2%, 1%);
+  }
+  60% {
+    transform: translate(2%, 2%);
+  }
+  70% {
+    transform: translate(-1%, -2%);
+  }
+  80% {
+    transform: translate(1%, -1%);
+  }
+  90% {
+    transform: translate(-2%, 2%);
+  }
+}
+
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.08;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.7'/></svg>");
+  animation: grain 1.4s steps(6) infinite;
+}
+
+.grain-heavy {
+  opacity: 0.14;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.pulse-soft {
+  animation: pulse-soft 2.4s ease-in-out infinite;
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  47% {
+    opacity: 0.92;
+  }
+  48% {
+    opacity: 0.6;
+  }
+  49% {
+    opacity: 1;
+  }
+}
+
+.flicker {
+  animation: flicker 4s ease-in-out infinite;
+}
+
+input,
+textarea {
+  font-family: "JetBrains Mono", monospace;
+}
+
+input::placeholder,
+textarea::placeholder {
+  font-family: "JetBrains Mono", monospace;
+  color: rgba(232, 228, 218, 0.4);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
