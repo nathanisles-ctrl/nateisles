@@ -25,6 +25,17 @@ export const tracks: Track[] = [
   },
   {
     id: "002",
+    title: "Frostbound Silence",
+    audio: "/music/frostbound-silence.mp3",
+    cover: "/music/frostbound-silence.jpg",
+    format: "SINGLE",
+    length: "—",
+    year: "2026",
+    sunoUrl:
+      "https://suno.com/song/550c0746-c4aa-4583-9df2-fb66249cd1bf",
+  },
+  {
+    id: "003",
     title: "Redline Reality",
     audio: "/music/redline-reality.mp3",
     cover: "/music/redline-reality-large.jpg",
