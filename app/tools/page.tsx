@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import GithubFeed from "@/components/GithubFeed";
 import GithubStats from "@/components/GithubStats";
+import NexusDashboard from "@/components/NexusDashboard";
 
 type Tool = {
   name: string;
@@ -13,24 +14,20 @@ type Tool = {
   status: "LIVE" | "BETA" | "SOON" | "INTERNAL";
   icon: "square" | "circle" | "line" | "triangle";
   href?: string;
+  featured?: boolean;
 };
 
 const tools: Tool[] = [
   {
-    name: "Tool 001",
-    description: "Currently in private development.",
-    type: "WEB APP",
-    stack: "NEXT.JS",
-    status: "SOON",
-    icon: "square",
-  },
-  {
-    name: "Tool 002",
-    description: "Creative AI utility for filmmakers.",
-    type: "CLI",
-    stack: "PYTHON",
-    status: "INTERNAL",
+    name: "Nexus",
+    description:
+      "Always-on agent. Weekly pipeline + Telegram bot in an agentic loop with Claude.",
+    type: "AGENT",
+    stack: "PYTHON · CLAUDE",
+    status: "LIVE",
     icon: "circle",
+    href: "/tools/nexus",
+    featured: true,
   },
 ];
 
@@ -89,28 +86,51 @@ export default function ToolsPage() {
         </div>
       </section>
 
-      {/* GRID */}
+      {/* NEXUS — featured live agent */}
       <section className="relative px-6 md:px-12 py-24 border-t border-bone/5">
         <div className="max-w-[1300px] mx-auto">
-          {tools.length === 0 ? (
-            <div className="max-w-2xl">
-              <h2 className="font-display font-black text-bone text-4xl md:text-5xl">
-                The first tools are coming.
+          <div className="flex items-end justify-between gap-6 mb-10 flex-wrap">
+            <div>
+              <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-3">
+                FEATURED AGENT / LIVE
+              </p>
+              <h2 className="font-display font-black text-bone text-3xl md:text-5xl tracking-[0.02em]">
+                Nexus.
               </h2>
-              <p className="mt-6 text-bone/70">
-                Currently building in private. Public releases starting Q3
-                2026.
+              <p className="mt-4 text-bone/70 max-w-xl">
+                Always-on Python agent. Weekly cron pipeline + 24/7 Telegram
+                bot in an agentic loop with Claude. Below is what he&apos;s
+                actually doing.
               </p>
             </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-              {tools.map((t, i) => (
-                <ToolCard key={t.name} tool={t} index={i} />
-              ))}
-            </div>
-          )}
+            <Link
+              href="/tools/nexus"
+              className="text-ember hover:text-ember-light text-[11px] tracking-[0.25em] transition-colors duration-300"
+            >
+              ANATOMY →
+            </Link>
+          </div>
+          <NexusDashboard />
         </div>
       </section>
+
+      {/* OTHER TOOLS — only render if more than just Nexus */}
+      {tools.filter((t) => !t.featured).length > 0 && (
+        <section className="relative px-6 md:px-12 py-24 border-t border-bone/5">
+          <div className="max-w-[1300px] mx-auto">
+            <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-10">
+              OTHER TOOLS
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+              {tools
+                .filter((t) => !t.featured)
+                .map((t, i) => (
+                  <ToolCard key={t.name} tool={t} index={i} />
+                ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* GITHUB ACTIVITY */}
       <section className="relative px-6 md:px-12 py-24 border-t border-bone/5">
