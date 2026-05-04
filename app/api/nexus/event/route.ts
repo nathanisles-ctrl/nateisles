@@ -35,29 +35,31 @@ export async function POST(req: Request) {
     ts: typeof body.ts === "number" ? body.ts : Math.floor(Date.now() / 1000),
   };
 
-  const headers = {
-    Authorization: `Bearer ${UPSTASH_TOKEN}`,
-    "Content-Type": "application/json",
-  };
+  const eventStr = JSON.stringify(event);
 
-  // LPUSH the new event then LTRIM to keep the list bounded.
-  const lpush = await fetch(`${UPSTASH_URL}/lpush/${KEY}`, {
+  // Use Upstash's pipeline endpoint — atomic LPUSH + LTRIM, unambiguous arg shape.
+  // Each inner array is [COMMAND, ...args]. Args MUST be strings.
+  const pipelineBody = [
+    ["LPUSH", KEY, eventStr],
+    ["LTRIM", KEY, "0", String(MAX_EVENTS - 1)],
+  ];
+
+  const res = await fetch(`${UPSTASH_URL}/pipeline`, {
     method: "POST",
-    headers,
-    body: JSON.stringify([JSON.stringify(event)]),
+    headers: {
+      Authorization: `Bearer ${UPSTASH_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(pipelineBody),
   });
 
-  if (!lpush.ok) {
+  if (!res.ok) {
+    const errText = await res.text().catch(() => "");
     return NextResponse.json(
-      { error: "store failed", status: lpush.status },
+      { error: "store failed", status: res.status, detail: errText },
       { status: 502 }
     );
   }
-
-  await fetch(`${UPSTASH_URL}/ltrim/${KEY}/0/${MAX_EVENTS - 1}`, {
-    method: "POST",
-    headers,
-  });
 
   return NextResponse.json({ ok: true });
 }
