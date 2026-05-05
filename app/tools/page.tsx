@@ -44,7 +44,7 @@ export default function ToolsPage() {
       {/* HERO */}
       <section className="relative min-h-screen flex items-center px-6 md:px-12 py-32 overflow-hidden">
         <video
-          className="absolute inset-0 w-full h-full object-cover object-[center_30%] opacity-40"
+          className="absolute inset-0 w-full h-full object-cover object-[center_15%] opacity-40"
           autoPlay
           muted
           loop
