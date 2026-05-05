@@ -42,8 +42,19 @@ export default function ToolsPage() {
   return (
     <main className="relative">
       {/* HERO */}
-      <section className="relative min-h-screen flex items-center px-6 md:px-12 py-32">
-        <div className="max-w-[1300px] mx-auto w-full">
+      <section className="relative min-h-screen flex items-center px-6 md:px-12 py-32 overflow-hidden">
+        <video
+          className="absolute inset-0 w-full h-full object-cover object-[center_30%] opacity-30"
+          autoPlay
+          muted
+          loop
+          playsInline
+        >
+          <source src="/me/tools-hero.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-b from-obsidian/70 via-obsidian/85 to-obsidian" />
+
+        <div className="relative z-10 max-w-[1300px] mx-auto w-full">
           <p className="font-mono text-xs tracking-[0.3em] text-bone/60">
             ~/tools
           </p>
