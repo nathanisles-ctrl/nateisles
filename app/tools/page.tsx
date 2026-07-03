@@ -189,10 +189,10 @@ export default function ToolsPage() {
             things people want to use.
           </motion.p>
           <a
-            href="https://github.com/nateisles"
+            href="https://github.com/nathanisles-ctrl"
             className="mt-10 inline-block font-mono text-xs tracking-[0.2em] text-ember hover:text-ember-light transition-colors duration-500"
           >
-            → github.com/nateisles
+            → github.com/nathanisles-ctrl
           </a>
         </div>
       </section>
