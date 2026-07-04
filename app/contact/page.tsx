@@ -14,9 +14,16 @@ export default function ContactPage() {
   );
 }
 
+const REASONS = ["GENERAL", "CONSULTING", "COLLABORATION", "PRESS"] as const;
+
 function ContactInner() {
   const params = useSearchParams();
   const projectContext = params.get("project");
+  const defaultReason =
+    projectContext &&
+    REASONS.includes(projectContext.toUpperCase() as (typeof REASONS)[number])
+      ? projectContext.toUpperCase()
+      : "GENERAL";
   const [sent, setSent] = useState(false);
   const [busy, setBusy] = useState(false);
 
@@ -32,6 +39,7 @@ function ContactInner() {
           name: data.get("name"),
           email: data.get("email"),
           message: data.get("message"),
+          reason: data.get("reason"),
           context: projectContext,
         }),
       }).catch(() => {});
@@ -85,6 +93,8 @@ function ContactInner() {
                   RE: {projectContext.toUpperCase()} INQUIRY
                 </p>
               )}
+
+              <ReasonField defaultValue={defaultReason} />
 
               <Field name="name" type="text" placeholder="NAME" required />
               <Field name="email" type="email" placeholder="EMAIL" required />
@@ -193,6 +203,27 @@ function ContactInner() {
         </div>
       </div>
     </main>
+  );
+}
+
+function ReasonField({ defaultValue }: { defaultValue: string }) {
+  return (
+    <div className="relative">
+      <label className="block text-bone/40 font-mono text-[10px] tracking-[0.25em] mb-3">
+        REASON FOR CONTACT
+      </label>
+      <select
+        name="reason"
+        defaultValue={defaultValue}
+        className="w-full bg-transparent border-b border-bone/30 focus:border-ember py-4 text-bone outline-none transition-colors duration-500 [&>option]:bg-obsidian"
+      >
+        {REASONS.map((r) => (
+          <option key={r} value={r}>
+            {r}
+          </option>
+        ))}
+      </select>
+    </div>
   );
 }
 

@@ -10,6 +10,7 @@ const links = [
   { href: "/music", label: "MUSIC" },
   { href: "/tools", label: "TOOLS" },
   { href: "/coaching", label: "COACHING" },
+  { href: "/consulting", label: "CONSULTING" },
   { href: "/contact", label: "CONTACT" },
 ];
 

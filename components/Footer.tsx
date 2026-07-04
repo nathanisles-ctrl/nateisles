@@ -6,6 +6,7 @@ const sections = [
   { href: "/music", label: "MUSIC" },
   { href: "/tools", label: "TOOLS" },
   { href: "/coaching", label: "COACHING" },
+  { href: "/consulting", label: "CONSULTING" },
 ];
 
 export default function Footer() {

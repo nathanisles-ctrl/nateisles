@@ -3,7 +3,15 @@ import type { MetadataRoute } from "next";
 const BASE = "https://nateisles.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/films", "/music", "/tools", "/coaching", "/contact"];
+  const routes = [
+    "",
+    "/films",
+    "/music",
+    "/tools",
+    "/coaching",
+    "/consulting",
+    "/contact",
+  ];
   const lastModified = new Date();
   return routes.map((r) => ({
     url: `${BASE}${r}`,
