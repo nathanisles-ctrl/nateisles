@@ -143,6 +143,32 @@ export default function ToolsPage() {
         </section>
       )}
 
+      {/* AI STACK */}
+      <section className="relative px-6 md:px-12 py-24 border-t border-bone/5">
+        <div className="max-w-[1300px] mx-auto">
+          <div className="flex items-end justify-between gap-6 flex-wrap">
+            <div>
+              <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-3">
+                REFERENCE
+              </p>
+              <h2 className="font-display font-black text-bone text-3xl md:text-5xl tracking-[0.02em]">
+                The AI stack.
+              </h2>
+              <p className="mt-4 text-bone/70 max-w-xl">
+                Video, image, music, voice, writing, and code — the tools
+                behind the work, sorted by function.
+              </p>
+            </div>
+            <Link
+              href="/tools/ai-stack"
+              className="text-ember hover:text-ember-light text-[11px] tracking-[0.25em] transition-colors duration-300"
+            >
+              VIEW STACK →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* GITHUB ACTIVITY */}
       <section className="relative px-6 md:px-12 py-24 border-t border-bone/5">
         <div className="max-w-[1100px] mx-auto">
