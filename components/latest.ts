@@ -1,11 +1,10 @@
 // Edit me when life changes — used for the home page LATEST strip + CURRENTLY widget.
 
-export const currently = {
-  building: "nateisles.com",
-  writing: "Track 004 — TBD",
-  reading: "—",
-  watching: "—",
-};
+// Add a row here whenever there's something real to show. No placeholders —
+// an empty widget reads better than a fake one.
+export const currently: { k: string; v: string }[] = [
+  { k: "BUILDING", v: "nateisles.com" },
+];
 
 export type LatestItem = {
   island: "FILMS" | "MUSIC" | "TOOLS" | "COACHING";

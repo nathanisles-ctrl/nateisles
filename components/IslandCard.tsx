@@ -14,6 +14,7 @@ type Props = {
   setHoveredIndex: (i: number | null) => void;
   videoSrc?: string;
   gradient?: string;
+  className?: string;
 };
 
 export default function IslandCard({
@@ -26,6 +27,7 @@ export default function IslandCard({
   setHoveredIndex,
   videoSrc,
   gradient = "from-storm/30 via-obsidian to-obsidian",
+  className,
 }: Props) {
   const [hover, setHover] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -58,7 +60,7 @@ export default function IslandCard({
       }}
       className={`transition-opacity duration-700 ease-cinematic ${
         dimmed ? "opacity-30" : "opacity-100"
-      }`}
+      } ${className ?? ""}`}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
     >

@@ -39,6 +39,13 @@ const islands = [
     videoSrc: "/me/islands/coaching.mp4",
     gradient: "from-ember-deep/10 via-obsidian-deep to-obsidian",
   },
+  {
+    numeral: "V",
+    name: "CONSULTING",
+    oneLiner: "Force, applied to your business.",
+    href: "/consulting",
+    gradient: "from-ember/20 via-obsidian to-obsidian",
+  },
 ];
 
 export default function Home() {
@@ -127,7 +134,7 @@ export default function Home() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             className="text-ember font-mono text-xs tracking-[0.3em] mb-12 md:mb-20 text-center"
           >
-            FOUR ISLANDS · ONE LINE
+            FIVE ISLANDS · ONE LINE
           </motion.p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10">
@@ -138,6 +145,11 @@ export default function Home() {
                 index={i}
                 hoveredIndex={hoveredIndex}
                 setHoveredIndex={setHoveredIndex}
+                className={
+                  i === islands.length - 1 && islands.length % 2 === 1
+                    ? "md:col-span-2"
+                    : undefined
+                }
               />
             ))}
           </div>
@@ -232,12 +244,7 @@ export default function Home() {
               <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-4">
                 CURRENTLY
               </p>
-              {[
-                { k: "BUILDING", v: currently.building },
-                { k: "WRITING", v: currently.writing },
-                { k: "READING", v: currently.reading },
-                { k: "WATCHING", v: currently.watching },
-              ].map((row) => (
+              {currently.map((row) => (
                 <div
                   key={row.k}
                   className="grid grid-cols-[100px_1fr] gap-4 text-sm"
