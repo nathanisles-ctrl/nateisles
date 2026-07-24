@@ -120,6 +120,12 @@ export default function ConsultingPage() {
               — deployed and maintained on my own servers. I don&apos;t just
               talk about AI, I ship it daily.
             </p>
+            <Link
+              href="/nexus"
+              className="mt-6 inline-block font-mono text-xs tracking-[0.2em] text-ember hover:text-ember-light transition-colors duration-500"
+            >
+              → Read the full Nexus case study
+            </Link>
           </motion.div>
         </div>
       </section>
