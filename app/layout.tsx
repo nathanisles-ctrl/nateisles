@@ -6,12 +6,12 @@ import CustomCursor from "@/components/CustomCursor";
 import PageTransition from "@/components/PageTransition";
 
 export const metadata: Metadata = {
-  title: "NATE ISLES — Building what didn't exist yesterday.",
+  title: "NATE ISLES — Football × AI",
   description:
-    "AI cinema, original music, software, and the craft of the offensive line. Force, in every form.",
+    "Former NFL, CFL and Arena offensive lineman building with AI. OL Mastery coaching, AI films, music and tools.",
   openGraph: {
     title: "NATE ISLES",
-    description: "Building what didn't exist yesterday.",
+    description: "Football × AI. Ex-pro lineman building with AI.",
     type: "website",
   },
 };

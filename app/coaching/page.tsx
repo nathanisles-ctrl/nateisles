@@ -1,8 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
-import Countdown from "@/components/Countdown";
 
 const pillars = [
   {
@@ -28,8 +26,6 @@ const pillars = [
 ];
 
 export default function CoachingPage() {
-  const [submitted, setSubmitted] = useState(false);
-
   return (
     <main className="relative" style={{ backgroundColor: "#080604" }}>
       <div className="grain-overlay grain-heavy" aria-hidden />
@@ -62,7 +58,7 @@ export default function CoachingPage() {
               }}
               className="font-display font-black text-bone text-7xl sm:text-8xl md:text-[10rem] lg:text-[14rem] tracking-[0.04em] leading-none"
             >
-              THE CRAFT
+              OL MASTERY
             </motion.h1>
             <motion.p
               initial={{ opacity: 0 }}
@@ -74,8 +70,19 @@ export default function CoachingPage() {
               }}
               className="mt-10 text-bone/85 text-sm md:text-base tracking-wider"
             >
-              A school for offensive linemen. Coming soon.
+              A school for offensive linemen. Doors are open.
             </motion.p>
+            <motion.a
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1.2, delay: 1.6, ease: [0.16, 1, 0.3, 1] }}
+              href="https://www.skool.com/ol-mastery-7183"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-10 inline-block border border-ember bg-ember text-obsidian px-8 py-3 text-xs md:text-sm tracking-[0.25em] font-bold hover:bg-transparent hover:text-ember transition-colors duration-500"
+            >
+              JOIN OL MASTERY →
+            </motion.a>
           </div>
         </div>
       </section>
@@ -130,7 +137,7 @@ export default function CoachingPage() {
               className="mt-10 text-bone/75 text-base md:text-lg leading-relaxed space-y-6"
             >
               <p>
-                Eight years on the line. Six teams across three leagues —
+                Eight years on the line. Five teams across three leagues —
                 NFL, CFL, Arena. Now I teach what most coaches don&apos;t:
                 the moments inside the reps. The eye discipline. The hand
                 violence. The patience. The mental architecture of the
@@ -168,7 +175,7 @@ export default function CoachingPage() {
           <div className="grid grid-cols-3 gap-px bg-bone/5 mb-px">
             {[
               { stat: "8+", label: "YEARS PRO" },
-              { stat: "6", label: "TEAMS" },
+              { stat: "5", label: "TEAMS" },
               { stat: "3", label: "LEAGUES" },
             ].map((c) => (
               <div
@@ -190,7 +197,7 @@ export default function CoachingPage() {
             {[
               {
                 league: "NFL",
-                teams: ["Seattle Seahawks", "Arizona Cardinals"],
+                teams: ["Seattle Seahawks"],
               },
               {
                 league: "CFL",
@@ -312,7 +319,7 @@ export default function CoachingPage() {
               coaching you&apos;ll get.
             </h2>
             <p className="mt-8 text-bone/75 text-base md:text-lg leading-relaxed">
-              A 60-second sample. The full library lives inside the school.
+              A 60-second sample. The full library lives inside OL Mastery.
             </p>
           </div>
 
@@ -338,41 +345,6 @@ export default function CoachingPage() {
         </div>
       </section>
 
-      {/* COUNTDOWN */}
-      <section className="relative px-6 md:px-12 py-32 border-t border-bone/5">
-        <div className="max-w-[1300px] mx-auto text-center">
-          <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-6">
-            UNTIL THE DOORS OPEN
-          </p>
-          <h2 className="font-display font-black text-bone text-4xl md:text-6xl tracking-[0.02em] mb-12">
-            Q4 2026.
-          </h2>
-          <Countdown />
-        </div>
-      </section>
-
-      {/* TESTIMONIAL */}
-      <section className="relative px-6 md:px-12 py-32 border-t border-bone/5">
-        <div className="max-w-[1100px] mx-auto">
-          <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-10">
-            EARLY VOICES
-          </p>
-          <motion.blockquote
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-15%" }}
-            transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display font-black text-bone text-3xl md:text-5xl lg:text-6xl tracking-[0.02em] leading-[1.1]"
-          >
-            &ldquo;Coming soon — early member quotes will live here once the
-            first cohort runs.&rdquo;
-          </motion.blockquote>
-          <p className="mt-8 text-ember font-mono text-[11px] tracking-[0.3em]">
-            — FOUNDING MEMBER, TBD
-          </p>
-        </div>
-      </section>
-
       {/* CONVERSION */}
       <section className="relative min-h-[80vh] flex items-center justify-center px-6 py-32 border-t border-bone/5">
         <div className="text-center max-w-2xl w-full">
@@ -383,47 +355,24 @@ export default function CoachingPage() {
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
             className="font-display font-black text-bone text-5xl md:text-7xl tracking-[0.02em]"
           >
-            Doors open soon.
+            Doors are open.
           </motion.h2>
           <p className="mt-8 text-bone/75 text-base md:text-lg">
-            The school launches Q4 2026 inside Skool. Founding member pricing
-            for the first 100. Sign up below to be on the list.
+            OL Mastery lives on Skool. Technique breakdowns, film study, and
+            direct access to me. Join today and start getting coached.
           </p>
 
-          {!submitted ? (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSubmitted(true);
-              }}
-              className="mt-10 flex flex-col sm:flex-row items-stretch gap-4 max-w-lg mx-auto"
-            >
-              <input
-                type="email"
-                required
-                placeholder="YOUR EMAIL"
-                className="flex-1 bg-transparent border-b border-bone/30 focus:border-ember py-3 text-bone outline-none transition-colors duration-500 text-center sm:text-left"
-              />
-              <button
-                type="submit"
-                className="border border-ember text-ember px-6 py-3 text-sm tracking-[0.2em] hover:bg-ember hover:text-obsidian transition-colors duration-500"
-              >
-                GET ON THE LIST
-              </button>
-            </form>
-          ) : (
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              className="mt-10 font-display font-black text-ember text-2xl md:text-3xl tracking-[0.05em]"
-            >
-              YOU&apos;RE ON THE LIST.
-            </motion.p>
-          )}
+          <a
+            href="https://www.skool.com/ol-mastery-7183"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 inline-block border border-ember bg-ember text-obsidian px-10 py-4 text-sm tracking-[0.25em] font-bold hover:bg-transparent hover:text-ember transition-colors duration-500"
+          >
+            JOIN OL MASTERY →
+          </a>
 
           <p className="mt-8 text-bone/40 text-xs tracking-wider">
-            We&apos;ll only email you about coaching. Nothing else.
+            Opens Skool in a new tab.
           </p>
         </div>
       </section>
