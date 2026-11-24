@@ -2,9 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import GithubFeed from "@/components/GithubFeed";
-import GithubStats from "@/components/GithubStats";
-import NexusDashboard from "@/components/NexusDashboard";
 
 type Tool = {
   name: string;
@@ -103,15 +100,15 @@ export default function ToolsPage() {
           <div className="flex items-end justify-between gap-6 mb-10 flex-wrap">
             <div>
               <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-3">
-                FEATURED AGENT / LIVE
+                FEATURED AGENT
               </p>
               <h2 className="font-display font-black text-bone text-3xl md:text-5xl tracking-[0.02em]">
                 Nexus.
               </h2>
               <p className="mt-4 text-bone/70 max-w-xl">
                 Always-on Python agent. Weekly cron pipeline + 24/7 Telegram
-                bot in an agentic loop with Claude. Below is what he&apos;s
-                actually doing.
+                bot in an agentic loop with Claude. Self-hosted on my own
+                server.
               </p>
             </div>
             <Link
@@ -121,7 +118,6 @@ export default function ToolsPage() {
               ANATOMY →
             </Link>
           </div>
-          <NexusDashboard />
         </div>
       </section>
 
@@ -166,22 +162,6 @@ export default function ToolsPage() {
               VIEW STACK →
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* GITHUB ACTIVITY */}
-      <section className="relative px-6 md:px-12 py-24 border-t border-bone/5">
-        <div className="max-w-[1100px] mx-auto">
-          <p className="text-ember font-mono text-[10px] tracking-[0.3em] mb-4">
-            ACTIVITY
-          </p>
-          <h2 className="font-display font-black text-bone text-3xl md:text-5xl tracking-[0.02em] mb-10">
-            Building, in public.
-          </h2>
-          <div className="mb-10">
-            <GithubStats />
-          </div>
-          <GithubFeed />
         </div>
       </section>
 

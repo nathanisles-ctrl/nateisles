@@ -9,6 +9,14 @@ import { latest, currently } from "@/components/latest";
 const islands = [
   {
     numeral: "I",
+    name: "COACHING",
+    oneLiner: "OL Mastery. The craft of the offensive line.",
+    href: "/coaching",
+    videoSrc: "/me/islands/coaching.mp4",
+    gradient: "from-ember-deep/10 via-obsidian-deep to-obsidian",
+  },
+  {
+    numeral: "II",
     name: "FILMS",
     oneLiner: "AI cinema and shorts.",
     href: "/films",
@@ -16,7 +24,7 @@ const islands = [
     gradient: "from-storm/40 via-obsidian to-obsidian",
   },
   {
-    numeral: "II",
+    numeral: "III",
     name: "MUSIC",
     oneLiner: "Original tracks and production.",
     href: "/music",
@@ -24,20 +32,12 @@ const islands = [
     gradient: "from-ember-deep/20 via-obsidian-warm to-obsidian",
   },
   {
-    numeral: "III",
+    numeral: "IV",
     name: "TOOLS",
     oneLiner: "Software and creative AI.",
     href: "/tools",
     videoSrc: "/me/islands/tools.mp4",
     gradient: "from-storm/30 via-obsidian to-obsidian",
-  },
-  {
-    numeral: "IV",
-    name: "COACHING",
-    oneLiner: "The craft of the offensive line.",
-    href: "/coaching",
-    videoSrc: "/me/islands/coaching.mp4",
-    gradient: "from-ember-deep/10 via-obsidian-deep to-obsidian",
   },
   {
     numeral: "V",
@@ -104,8 +104,20 @@ export default function Home() {
             }}
             className="mt-8 text-bone/90 text-sm md:text-base tracking-wide"
           >
-            Building what didn&apos;t exist yesterday.
+            Football &times; AI. Ex-NFL, CFL &amp; Arena lineman building with AI.
           </motion.p>
+
+          <motion.a
+            initial={{ opacity: 0 }}
+            animate={{ opacity: revealed ? 1 : 0 }}
+            transition={{ duration: 1.2, delay: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            href="https://www.skool.com/ol-mastery-7183"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-10 inline-block border border-ember bg-ember text-obsidian px-8 py-3 text-xs md:text-sm tracking-[0.25em] font-bold hover:bg-transparent hover:text-ember transition-colors duration-500"
+          >
+            JOIN OL MASTERY →
+          </motion.a>
 
           <motion.div
             initial={{ opacity: 0 }}

@@ -18,9 +18,9 @@ export type LatestItem = {
 export const latest: LatestItem[] = [
   {
     island: "FILMS",
-    title: "Reel — In Progress",
-    meta: "AI cinema · 2026",
-    href: "/films",
+    title: "Code Blooded",
+    meta: "AI sci-fi short · watch on YouTube",
+    href: "https://www.youtube.com/watch?v=ZJNc0o2lPlQ",
     thumb: "/me/films/cinematic-1.mp4",
     isVideo: true,
   },
@@ -33,14 +33,14 @@ export const latest: LatestItem[] = [
   },
   {
     island: "TOOLS",
-    title: "Building in private",
-    meta: "Q3 2026 release",
+    title: "Nexus",
+    meta: "Self-hosted AI agent",
     href: "/tools",
   },
   {
     island: "COACHING",
-    title: "The Craft — Doors Q4",
-    meta: "Founding pricing for first 100",
+    title: "OL Mastery — Doors open",
+    meta: "Join on Skool",
     href: "/coaching",
     thumb: "/me/portrait-editorial.jpg",
   },
